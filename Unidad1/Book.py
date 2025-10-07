@@ -5,7 +5,9 @@ class Book():
         self.autor = autor
         self.editorial = editorial
         self.paginas = paginas
-        if precio < 50 and precio > 1000:
+        if precio < 50 or precio > 1000:
+            print('El precio del libro debe de ser mayor que 50 y menor que 1000')
+        else:
             self.precio = precio
         self.ejemplares = ejemplares
 
