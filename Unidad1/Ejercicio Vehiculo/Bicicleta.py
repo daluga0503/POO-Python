@@ -8,11 +8,11 @@ class Bicicleta(Vehiculo):
     def andar_bici(self):
         kms = int(input('¿Cuántos kilómetros quiere recorrer?: '))
         self.kmsTotalesBici += kms
-        Vehiculo.kilometrosRecorridos = kms
+        self.kilometrosRecorridos += kms
+        Vehiculo.kilometrosTotales += kms
         
     def hacer_caballito(self):
         print('¡Estoy haciendo el caballito!')
     
-    @classmethod
     def get_kms_total_bici(self):
         print(f'La bicicleta lleva recorridos {self.kmsTotalesBici} km')
