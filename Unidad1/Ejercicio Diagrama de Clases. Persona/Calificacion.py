@@ -10,4 +10,8 @@ class Calificacion():
         return self.notaFinal
     
     def setNotaFinal(self, nota):
-        self.notaFinal = nota
+        if 0 <= nota <= 10:
+            self.notaFinal = nota
+
+    def __str__(self):
+        return f"{self._modulo.getNombre()}: {self._notaFinal}"
