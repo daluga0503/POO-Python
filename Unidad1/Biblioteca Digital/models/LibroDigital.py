@@ -1,4 +1,5 @@
 from models.RecursoDigital import RecursoDigital
+from typing import Dict, Any
 
 class LibroDigital(RecursoDigital):
     def __init__(self, titulo, autor, anio, num_paginas, formato):
@@ -29,3 +30,18 @@ class LibroDigital(RecursoDigital):
     
     def tipo(self):
         return 'Libro'
+    
+    def to_dict(self) -> Dict[str, Any]:
+        diccionario_libro = super().to_dict()
+        diccionario_libro.update({
+            "paginas": self.num_paginas,
+            "formato": self.formato
+        })
+        return diccionario_libro
+        
+    @staticmethod
+    def from_dict(data: Dict[str, Any]) -> "LibroDigital":
+        return LibroDigital(
+            data["recurso_id"], data["titulo"], data["autor"], data["anio"], data["num_paginas"], data["formato"], data["isbn"]
+        )
+        

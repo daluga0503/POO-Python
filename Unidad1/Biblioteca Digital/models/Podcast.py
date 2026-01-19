@@ -1,4 +1,5 @@
 from models.RecursoDigital import RecursoDigital
+from typing import Dict, Any
 
 class Podcast(RecursoDigital):
     def __init__(self, titulo, autor, anio, num_episodios, tema):
@@ -31,3 +32,17 @@ class Podcast(RecursoDigital):
 
     def tipo(self):
         return 'Podcast'
+    
+    def to_dict(self) -> Dict[str, Any]:
+        diccionario_podcast = super().to_dict()
+        diccionario_podcast.update({
+            "num_episodios": self.num_episodios,
+            "tema": self.tema
+        })
+        return diccionario_podcast
+
+    @staticmethod
+    def from_dict(data: Dict[str, Any]) -> "Podcast":
+        return Podcast(
+            data["recurso_id"], data["titulo"], data["autor"], data["anio"], data["num_episodios"], data["tema"]
+        )

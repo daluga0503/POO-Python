@@ -1,4 +1,5 @@
 from models.RecursoDigital import RecursoDigital
+from typing import Dict, Any
 
 class VideoCurso(RecursoDigital):
     def __init__(self, titulo, autor, anio, duracion_minutos, nivel):
@@ -29,3 +30,16 @@ class VideoCurso(RecursoDigital):
 
     def tipo(self):
         return 'Vídeo'
+    
+    def to_dict(self) -> Dict[str, Any]:
+        diccionario_video = super().to_dict()
+        diccionario_video.update({
+            "duracion_minutos": self.duracion_minutos,
+            "nivel": self.nivel
+        })
+        return diccionario_video
+    @staticmethod
+    def from_dict(data: Dict[str, Any]) -> "VideoCurso":
+        return VideoCurso(
+            data["recurso_id"], data["titulo"], data["autor"], data["anio"], data["duracion_minutos"], data["nivel"]
+        )

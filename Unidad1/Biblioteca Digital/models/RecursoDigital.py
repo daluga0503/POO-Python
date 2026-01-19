@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-
+from typing import Dict, Any
 class RecursoDigital(ABC):
     def __init__(self, titulo, autor, anio):
         self.__titulo = titulo
@@ -43,4 +43,25 @@ class RecursoDigital(ABC):
     @abstractmethod
     def tipo(self):
         pass
+
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "tipo": self.tipo,
+            "recurso_id": self.__id,
+            "titulo": self.__titulo,
+            "autor": self.__autor,
+            "anio": self.__anio
+        }
+    @staticmethod  
+    def from_dict(data: Dict[str,Any]) -> "RecursoDigital":
+        from models.LibroDigital import LibroDigital, Podcast, VideoCurso
+
+        match data["tipo"]:
+            case "LibroDigital": return LibroDigital.from_dict(data)
+            case "Podcast": return Podcast.from_dict(data)
+            case "VideoCurso": return VideoCurso.from_dict(data)
+            case _: raise  ValueError("Tipo Inválido")
+            
+
         
