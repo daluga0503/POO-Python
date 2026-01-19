@@ -1,4 +1,4 @@
-from RecursoDigital import RecursoDigital
+from models.RecursoDigital import RecursoDigital
 
 class BibliotecaDigital():
     def __init__(self):

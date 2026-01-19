@@ -1,4 +1,4 @@
-from RecursoDigital import RecursoDigital
+from models.RecursoDigital import RecursoDigital
 
 class VideoCurso(RecursoDigital):
     def __init__(self, titulo, autor, anio, duracion_minutos, nivel):

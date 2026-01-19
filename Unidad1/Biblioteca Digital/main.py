@@ -1,8 +1,7 @@
-from LibroDigital import LibroDigital
-from VideoCurso import VideoCurso
-from BibliotecaDigital import BibliotecaDigital
-from Podcast import Podcast
-
+from models.LibroDigital import LibroDigital
+from models.VideoCurso import  VideoCurso
+from models.BibliotecaDigital import BibliotecaDigital
+from models.Podcast import Podcast
 
 libro_ejemplo = LibroDigital('Fundamentos de Ciberseguridad', 'Dra. E. Torres', 2023, 600, 'PDF')
 video_ejemplo = VideoCurso('Técnicas de Ilustración Digital', 'ArtMaster', 2024, 95, 'Intermedio')
