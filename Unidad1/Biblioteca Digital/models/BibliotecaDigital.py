@@ -25,3 +25,9 @@ class BibliotecaDigital():
                 print(f'> {recurso.abrir()}')
         else:
             return 'La biblioteca esta vacía'
+        
+    def buscar_por_id(self, id):
+        for recurso in self.__recursos:
+            if id == recurso.id:
+                return recurso
+        return None
