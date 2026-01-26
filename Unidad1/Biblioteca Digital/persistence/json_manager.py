@@ -7,7 +7,7 @@ def guardar_recursos(ruta_fichero:str, recursos: List[RecursoDigital]) -> None:
     data = [recurso.to_dict() for recurso in recursos]
     os.makedirs(os.path.dirname(ruta_fichero), exist_ok=True)
 
-    with open(ruta_fichero, 'w') as file:
+    with open(ruta_fichero, 'a') as file:
         json.dump(data, file, indent=2)
 
 def cargar_recursos(ruta_fichero: str) -> List[RecursoDigital]:
@@ -20,11 +20,11 @@ def cargar_recursos(ruta_fichero: str) -> List[RecursoDigital]:
     if not isinstance(contenido, list):
         raise ValueError('El json debe contener una lista de recursos.')
     
-    recursos = List[RecursoDigital] = []
+    recursos: List[RecursoDigital] = []
 
     for item in contenido:
         if not isinstance(item, dict):
-            raise ValueError('El item debe ser un objeto diccionario.')   
+            raise ValueError('El item debe ser un objeto diccionario.')
         recursos.append(RecursoDigital.from_dict(item))
 
     return recursos

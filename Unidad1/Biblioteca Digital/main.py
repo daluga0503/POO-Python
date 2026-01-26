@@ -1,22 +1,52 @@
 from models.LibroDigital import LibroDigital
 from models.VideoCurso import  VideoCurso
-from models.BibliotecaDigital import BibliotecaDigital
+from services.BibliotecaDigital import BibliotecaDigital
 from models.Podcast import Podcast
-from persistence.json_manager import json_manager
+from persistence.json_manager import guardar_recursos, cargar_recursos
+import traceback
 
-RUTA_JSON = 'data/recursos.json'
+RUTA_JSON = 'C:\\Users\\danie\\Documents\\Curso Especializacion\\POO-Python\\Unidad1\\Biblioteca Digital\\data\\recursos.json'
 
 def mostrar_menu():
     print('\n=== Biblioteca de Recursos Digitales (Entrega 2 - JSON)==')
     print('1. Listar Recursos')
     print('2. Añadir Recursos')
-    print('3. Guardar    en JSON')
-    print('4. Cargar desde JSON (reemplaza la lista actual)')
+    print('3. Guardar en JSON')
+    print('4. Cargar desde JSON')
     print('5. Salir')
 
-def alta_recurso():
-    pass
+def menu_recursos():
+    print('\n===  Recursos Digitales  ===')
+    print('1. Añadir LibroDigital.')
+    print('2. Añadir Podcast.')
+    print('3. Añadir VideoCurso')
 
+def form_base():
+    titulo = input('Introduce el titulo: ')
+    autor = input('Introduce el autor: ')
+    anio = input('Introduce el año: ')
+    return titulo, autor, anio
+
+def form_libro():
+    paginas = input('Introduce el número de páginas: ')
+    formato = input('Introduce el formato: ')
+    isbn = input('Introduce el ISBN: ')
+    return paginas, formato, isbn
+
+def form_podcast():
+    num_episodio = input('Introduce el número de episodios: ')
+    tema = input('Introduce el tema: ')
+    duracion_min = input('Introduce la duración en Minutos: ')
+    feed_url = input('Introduce la feed URL: ')
+    return num_episodio, tema, duracion_min, feed_url
+
+
+def form_video():
+    duracion_min = input('Introduce la duración en Minutos: ')
+    nivel = input('Introduce el nivel: ')
+    return duracion_min, nivel
+
+mi_biblioteca = BibliotecaDigital()
 
 
 while True:
@@ -25,35 +55,50 @@ while True:
         opcion = int(input('Introduce la opción del menú: '))
         match opcion:
             case 1:
-                BibliotecaDigital.listar_recursos
+                mi_biblioteca.listar_recursos()
             case 2:
-                pass
+                menu_recursos()
+                try:
+                    opcion_creacion = int(input('Introduce la opción del submenú: '))
+                    titulo, autor, anio = form_base()
+                    match opcion_creacion:
+                        case 1:
+                            paginas, formato, isbn = form_libro()
+                            libro = LibroDigital(titulo, autor, int(anio), int(paginas), formato, isbn)
+                            mi_biblioteca.anyadir_recurso(libro)
+                        case 2:
+                            num_episodio, tema, duracion_min, feed_url = form_podcast()
+                            podcast = Podcast(titulo, autor, int(anio), int(num_episodio), tema, int(duracion_min), feed_url)
+                            mi_biblioteca.anyadir_recurso(podcast)
+                        case 3:
+                            duracion_min, nivel = form_video()
+                            video = VideoCurso(titulo, autor, int(anio), int(duracion_min), nivel)
+                            mi_biblioteca.anyadir_recurso(video)
+                        case _:
+                            print('Opción inválida. Introduce una opción válida.')
+                    
+                except ValueError as e:
+                    print('Error: {e}')
             case 3:
-                pass
+                guardar_recursos(RUTA_JSON, mi_biblioteca.recursos)
             case 4:
-                pass
+                recursos = cargar_recursos(RUTA_JSON)
+                for recurso in recursos:
+                    print(recurso.__str__())
             case 5:
                 break
             case __:
                 print('Opción inválida. Introduce una opción válida.')
 
-    except Exception as e:
+    except ValueError as e:
         print('Error al introducir la opción. Se espera un valor entero.')
-
-
-
-
-# libro_ejemplo = LibroDigital('Fundamentos de Ciberseguridad', 'Dra. E. Torres', 2023, 600, 'PDF')
-#video_ejemplo = VideoCurso('Técnicas de Ilustración Digital', 'ArtMaster', 2024, 95, 'Intermedio')
-#podcast_ejemplo = Podcast('El Futuro de la Energía', 'GeoTalks', 2024, 25, 'Ciencia y Medio Ambiente')
+    except Exception as e:
+        print(f'Error: {e}')
+        traceback.print_exc()
     
 
-#mi_biblioteca = BibliotecaDigital()
 
-#print('\nAÑADIENDO RECURSOS A LA BIBLIOTECA')
-#mi_biblioteca.anyadir_recurso(libro_ejemplo)
-#mi_biblioteca.anyadir_recurso(video_ejemplo)
-#mi_biblioteca.anyadir_recurso(podcast_ejemplo)
+
 
 
 #print('')

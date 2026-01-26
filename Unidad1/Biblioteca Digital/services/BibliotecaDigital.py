@@ -4,10 +4,14 @@ class BibliotecaDigital():
     def __init__(self):
         self.__recursos = []
 
+    @property
+    def recursos(self):
+        return self.__recursos
+
     def anyadir_recurso(self, recurso):
         if isinstance(recurso, RecursoDigital):
             self.__recursos.append(recurso)
-            print(f'Recurso Añadido: {recurso.get_titulo()} ({recurso.tipo()})')
+            print(f'Recurso Añadido: {recurso.titulo} ({recurso.tipo()})')
         else:
             print('Error: Solo se pueden añadir instancias de RecursoDigital.')
 
@@ -16,7 +20,7 @@ class BibliotecaDigital():
             for i, recurso in enumerate(self.__recursos):
                 print(f'{i+1} Tipo: {recurso.tipo()} | {recurso.descripcion_basica()}\n')
         else:
-            return 'La biblioteca esta vacía'
+            print('La biblioteca esta vacía.')
         
     
     def abrir_todos(self):
@@ -26,8 +30,8 @@ class BibliotecaDigital():
         else:
             return 'La biblioteca esta vacía'
         
-    def buscar_por_id(self, id):
+    def buscar_por_titulo(self, titulo):
         for recurso in self.__recursos:
-            if id == recurso.id:
+            if titulo == recurso.titulo:
                 return recurso
         return None
