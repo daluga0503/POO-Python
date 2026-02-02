@@ -96,23 +96,3 @@ while True:
         print(f'Error: {e}')
         traceback.print_exc()
     
-
-
-
-
-
-#print('')
-#mi_biblioteca.listar_recursos()
-#mi_biblioteca.abrir_todos()
-
-
-#print('\nMODIFICANDO ATRIBUTOS Y COMPROBANDO ENCAPSULACIÓN')
-
-#print(f'Título anterior del VideoCurso: {video_ejemplo.get_titulo()}')
-#video_ejemplo.set_titulo('Técnicas de Ilustración Avanzada (Actualizado)')
-#print(f'Título nuevo del VideoCurso: {video_ejemplo.get_titulo()}')
-
-#print('\nIntentando modificar el año del libro a un valor inválido:')
-#libro_ejemplo.set_anio(-2025)
-
-#mi_biblioteca.listar_recursos()

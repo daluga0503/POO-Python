@@ -1,6 +1,6 @@
 from models.RecursoDigital import RecursoDigital
 
-class BibliotecaDigital():
+class BibliotecaDigitalService():
     def __init__(self):
         self.__recursos = []
 
