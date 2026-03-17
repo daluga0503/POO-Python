@@ -15,7 +15,7 @@ class House():
     
     @price.setter
     def price(self, new_price):
-        if isinstance(float, new_price) and new_price > 0:
+        if isinstance(new_price, float) and new_price > 0:
             self.__price = new_price
         else:
             raise ValueError('Error al introducir el nuevo precio')
@@ -26,7 +26,7 @@ class House():
     
     @area.setter
     def area(self, new_area):
-        if isinstance(float, new_area) and new_area > 0:
+        if isinstance(new_area, float) and new_area > 0:
             self.__area = new_area
         else:
             raise ValueError('Error al introducir el nuevo area.')
@@ -37,7 +37,7 @@ class House():
     
     @bedrooms.setter
     def bedrooms (self, new_bedrooms):
-        if isinstance(float, new_bedrooms) and new_bedrooms > 0:
+        if isinstance(new_bedrooms, float) and new_bedrooms > 0:
             self.__bedrooms = new_bedrooms
         else:
             raise ValueError('Error al introducir el número de habitaciones.')
@@ -48,7 +48,7 @@ class House():
     
     @bathrooms.setter
     def bathrooms (self, new_bathrooms):
-        if isinstance(float, new_bathrooms) and new_bathrooms > 0:
+        if isinstance(new_bathrooms, float) and new_bathrooms > 0:
             self.__bathrooms = new_bathrooms
         else:
             raise ValueError('Error al introducir el número de baños.')
@@ -59,7 +59,7 @@ class House():
     
     @parking.setter
     def parking(self, new_parking):
-        if isinstance(int, new_parking) and  new_parking >= 0:
+        if isinstance(new_parking, int) and  new_parking >= 0:
             self.__parking = new_parking
         else:
             raise ValueError('Error al introducir el número de parking.')
@@ -70,7 +70,7 @@ class House():
     
     @basement.setter
     def basement(self, new_basement):
-        if isinstance(bool, new_basement):
+        if isinstance(new_basement, str) and new_basement != '':
             self.__basement = new_basement
         else:
             raise ValueError('Error al introducir si tiene sótano la vivienda.')
@@ -86,6 +86,7 @@ class House():
             "basement": self.__basement
         }
     
+    @staticmethod
     def from_dict(data: Dict[str, Any]) -> "House":
         return House(
             price = data["price"],
