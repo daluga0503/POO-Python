@@ -2,7 +2,7 @@ from __future__ import annotations
 from models import RecursoDigital, LibroDigital, VideoCurso, Podcast
 from persistence.sqlite_manager import init_db, listar_recursos_db, agregar_recurso_db, borrar_recurso_db
 
-RUTA_DB = "data/recursos.db"
+RUTA_DB = "2_Trimestre/ProyectoBibliotecaDigitalSQLite/data/recursos.db"
 
 #1 Muestra el menú por pantalla
 def mostrar_menu() -> None:
